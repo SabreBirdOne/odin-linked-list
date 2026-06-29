@@ -11,12 +11,25 @@ function createAnimalList() {
     return list;
 }
 
-test('toString() test', ()=>{
+test('toString() test', () => {
     let list = createAnimalList();
     expect(list.toString()).toBe('( dog ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null')
 })
 
-test('size() test', ()=>{
+test('size() test', () => {
     let list = createAnimalList();
     expect(list.size()).toEqual(6);
 })
+
+test('prepend() with existing linked list test', () => {
+    let list = createAnimalList();
+    list.prepend('raven');
+    expect(list.toString()).toBe('( raven ) -> ( dog ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null')
+});
+
+test('prepend() on empty list test', () => {
+    let list = new LinkedList();
+    list.prepend('raven');
+    list.prepend('lynx')
+    expect(list.toString()).toBe('( lynx ) -> ( raven ) -> null');
+});

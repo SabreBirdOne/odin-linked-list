@@ -29,6 +29,19 @@ export default class LinkedList {
 
     prepend(value){
         //  adds a new node containing value to the start of the list
+        let newNode = new Node(value);
+
+        if (this.length == 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+
+        else {
+            newNode.nextNode = this.head;
+            this.head = newNode;
+        }
+
+        this.length++;
 
     }
 
