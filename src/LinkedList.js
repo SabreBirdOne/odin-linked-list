@@ -64,6 +64,14 @@ export default class LinkedList {
 
     at(index){
         // return the value of the node at the given index. If there’s no node at the given index, returns undefined.
+        let currentNode = this.headNode;
+        let currentIndex = 0;
+        while(currentNode !== null){
+            if (currentIndex === index) return currentNode.value;
+            currentNode = currentNode.nextNode;
+            currentIndex++;
+        }
+        return undefined;
     }
 
     pop(){

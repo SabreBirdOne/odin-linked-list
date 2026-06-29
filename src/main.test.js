@@ -38,10 +38,24 @@ test('head and tail functions on empty list', () => {
     let list = new LinkedList();
     expect(list.head()).toBeUndefined();
     expect(list.tail()).toBeUndefined();
-})
+});
 
 test('head and tail on existing list', () => {
     const list = createAnimalList();
     expect(list.head()).toBe('dog');
     expect(list.tail()).toBe('turtle');
-})
+});
+
+test('at() empty list', () => {
+    let list = new LinkedList();
+    expect(list.at(0)).toBeUndefined();
+    expect(list.at(9999)).toBeUndefined();
+});
+
+test('at() on existing list', () => {
+    const list = createAnimalList();
+    expect(list.at(0)).toBe('dog');
+    expect(list.at(4)).toBe('snake');
+    expect(list.at(-1)).toBeUndefined();
+    expect(list.at(6)).toBeUndefined();
+});
