@@ -4,7 +4,7 @@ export default class LinkedList {
     constructor(){
         this.head = null;
         this.tail = null;
-        this.size = 0;
+        this.length = 0;
     }
     // Representation Invariant: this.size >= 0
 
@@ -12,7 +12,7 @@ export default class LinkedList {
         // adds a new node containing value to the end of the list
         const newNode = new Node(value);
 
-        if (this.size == 0){
+        if (this.length == 0){
             this.head = newNode;
             this.tail = newNode;
         }
@@ -24,7 +24,7 @@ export default class LinkedList {
             this.tail = newNode;
         }
 
-        this.size++;
+        this.length++;
     }
 
     prepend(value){
@@ -34,7 +34,7 @@ export default class LinkedList {
 
     size(){
         // returns the total number of nodes in the list
-        return this.size;
+        return this.length;
     }
 
     head(){
