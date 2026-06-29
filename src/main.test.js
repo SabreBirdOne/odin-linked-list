@@ -105,13 +105,32 @@ test('contains() on empty list', () => {
 })
 
 test('contains() on 1-element list', () => {
-    let list = createRavenList()
+    let list = createRavenList();
     expect(list.contains('anything else not raven')).toBeFalsy();
     expect(list.contains('raven')).toBeTruthy();
 })
 
 test('contains() on existing list', () => {
-    let list = createAnimalList()
+    let list = createAnimalList();
     expect(list.contains('raven')).toBeFalsy();
     expect(list.contains('dog')).toBeTruthy();
+})
+
+test('findIndex() on empty list', () => {
+    let list = new LinkedList();
+    expect(list.findIndex('anything')).toBe(-1);
+})
+
+test('findIndex() on 1-element list', () => {
+    let list = createRavenList();
+    expect(list.findIndex('anything else not raven')).toBe(-1);
+    expect(list.findIndex('raven')).toBe(0);
+})
+
+test('findIndex() on existing list (with duplicates)', () => {
+    let list = createAnimalList();
+    list.prepend('dog');
+    expect(list.findIndex('raven')).toBe(-1);
+    expect(list.findIndex('dog')).toBe(0);
+
 })

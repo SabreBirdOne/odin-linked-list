@@ -108,6 +108,14 @@ export default class LinkedList {
         If more than one node has a value matching the given value, 
         returns the index of the first node with the matching value.
         */
+        let currentNode = this.headNode;
+        let currentIndex = 0;
+        while(currentNode !== null){
+            if (currentNode.value === value) return currentIndex;
+            currentNode = currentNode.nextNode;
+            currentIndex++;
+        }
+        return -1;
     }
 
     toString(){
