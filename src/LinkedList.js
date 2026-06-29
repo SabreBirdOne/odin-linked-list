@@ -2,8 +2,8 @@ import Node from "./Node";
 
 export default class LinkedList {
     constructor(){
-        this.head = null;
-        this.tail = null;
+        this.headNode = null;
+        this.tailNode = null;
         this.length = 0;
     }
     // Representation Invariant: this.size >= 0
@@ -13,15 +13,15 @@ export default class LinkedList {
         const newNode = new Node(value);
 
         if (this.length == 0){
-            this.head = newNode;
-            this.tail = newNode;
+            this.headNode = newNode;
+            this.tailNode = newNode;
         }
         else {
             // at the tail node, update nextNode pointer
-            (this.tail).nextNode = newNode; 
+            (this.tailNode).nextNode = newNode; 
 
             // update the tail pointer of LinkedList
-            this.tail = newNode;
+            this.tailNode = newNode;
         }
 
         this.length++;
@@ -32,13 +32,13 @@ export default class LinkedList {
         let newNode = new Node(value);
 
         if (this.length == 0){
-            this.head = newNode;
-            this.tail = newNode;
+            this.headNode = newNode;
+            this.tailNode = newNode;
         }
 
         else {
-            newNode.nextNode = this.head;
-            this.head = newNode;
+            newNode.nextNode = this.headNode;
+            this.headNode = newNode;
         }
 
         this.length++;
@@ -83,7 +83,7 @@ export default class LinkedList {
         let result = '';
         if (!this.size) return result;
         
-        let currentNode = this.head;
+        let currentNode = this.headNode;
         while(currentNode !== null){
             result += `( ${currentNode.value} ) -> `
             currentNode = currentNode.nextNode;
