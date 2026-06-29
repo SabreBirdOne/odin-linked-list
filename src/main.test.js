@@ -58,7 +58,7 @@ test('head and tail functions on 1-element list', () => {
     expect(list.head()).toBe(list.tail());
 });
 
-test('head and tail on existing list', () => {
+test('head and tail functions on existing list', () => {
     const list = createAnimalList();
     expect(list.head()).toBe('dog');
     expect(list.tail()).toBe('turtle');
@@ -97,4 +97,21 @@ test('pop() on existing list', () => {
     const poppedValue = list.pop();
     expect(list.toString()).toBe('( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null');
     expect(poppedValue).toBe('dog');
+})
+
+test('contains() on empty list', () => {
+    let list = new LinkedList();
+    expect(list.contains('anything')).toBeFalsy();
+})
+
+test('contains() on 1-element list', () => {
+    let list = createRavenList()
+    expect(list.contains('anything else not raven')).toBeFalsy();
+    expect(list.contains('raven')).toBeTruthy();
+})
+
+test('contains() on existing list', () => {
+    let list = createAnimalList()
+    expect(list.contains('raven')).toBeFalsy();
+    expect(list.contains('dog')).toBeTruthy();
 })

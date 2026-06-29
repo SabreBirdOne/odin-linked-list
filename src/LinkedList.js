@@ -94,6 +94,12 @@ export default class LinkedList {
 
     contains(value){
         // returns true if the passed in value is in the list and otherwise returns false.
+        let currentNode = this.headNode;
+        while(currentNode !== null){
+            if (currentNode.value === value) return true;
+            currentNode = currentNode.nextNode;
+        }
+        return false;
     }
 
     findIndex(value){
