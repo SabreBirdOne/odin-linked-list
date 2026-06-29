@@ -11,6 +11,12 @@ function createAnimalList() {
     return list;
 }
 
+function createRavenList() {
+    const list = new LinkedList();
+    list.append('raven');
+    return list;
+}
+
 test('toString() test', () => {
     let list = createAnimalList();
     expect(list.toString()).toBe('( dog ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null')
@@ -45,6 +51,13 @@ test('head and tail functions on empty list', () => {
     expect(list.tail()).toBeUndefined();
 });
 
+test('head and tail functions on 1-element list', () => {
+    let list = createRavenList();
+    expect(list.head()).toBe('raven');
+    expect(list.tail()).toBe('raven');
+    expect(list.head()).toBe(list.tail());
+});
+
 test('head and tail on existing list', () => {
     const list = createAnimalList();
     expect(list.head()).toBe('dog');
@@ -73,8 +86,7 @@ test('pop() on empty list', () => {
 });
 
 test('pop() on 1-element list', () => {
-    let list = new LinkedList();
-    list.prepend('raven');
+    let list = createRavenList();
     const poppedValue = list.pop();
     expect(list.toString()).toBe('');
     expect(poppedValue).toBe('raven');
