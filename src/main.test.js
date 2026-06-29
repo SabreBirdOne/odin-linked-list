@@ -16,6 +16,11 @@ test('toString() test', () => {
     expect(list.toString()).toBe('( dog ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null')
 })
 
+test('toString() test on empty list', () => {
+    let list = new LinkedList();
+    expect(list.toString()).toBe("");
+})
+
 test('size() test', () => {
     let list = createAnimalList();
     expect(list.size()).toEqual(6);
@@ -58,4 +63,11 @@ test('at() on existing list', () => {
     expect(list.at(4)).toBe('snake');
     expect(list.at(-1)).toBeUndefined();
     expect(list.at(6)).toBeUndefined();
+});
+
+test('pop() on empty list', () => {
+    let list = new LinkedList();
+    const poppedValue = list.pop();
+    expect(list.toString()).toBe('');
+    expect(poppedValue).toBeUndefined();
 });

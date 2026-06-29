@@ -76,6 +76,20 @@ export default class LinkedList {
 
     pop(){
         // remove the head node from the list and return its value. If it’s used on an empty list, returns undefined.
+        const oldHead = this.headNode;
+        if (!oldHead) return undefined;
+
+        const oldHeadValue = oldHead.value;
+        if (!oldHead.nextNode) {
+            this.headNode = null;
+            this.tailNode = null;
+        }
+        else {
+            this.headNode = this.headNode.nextNode;
+        }
+            
+        this.length--;
+        return oldHeadValue;
     }
 
     contains(value){
@@ -92,8 +106,8 @@ export default class LinkedList {
 
     toString(){
         // returns a string displaying LinkedList. If the list is empty, returns an empty string
-        let result = '';
-        if (!this.size) return result;
+        let result = "";
+        if (!this.length) return result;
         
         let currentNode = this.headNode;
         while(currentNode !== null){
