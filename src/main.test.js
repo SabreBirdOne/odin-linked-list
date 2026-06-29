@@ -71,3 +71,18 @@ test('pop() on empty list', () => {
     expect(list.toString()).toBe('');
     expect(poppedValue).toBeUndefined();
 });
+
+test('pop() on 1-element list', () => {
+    let list = new LinkedList();
+    list.prepend('raven');
+    const poppedValue = list.pop();
+    expect(list.toString()).toBe('');
+    expect(poppedValue).toBe('raven');
+})
+
+test('pop() on existing list', () => {
+    let list = createAnimalList();
+    const poppedValue = list.pop();
+    expect(list.toString()).toBe('( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null');
+    expect(poppedValue).toBe('dog');
+})
