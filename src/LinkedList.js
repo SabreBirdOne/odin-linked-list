@@ -52,10 +52,14 @@ export default class LinkedList {
 
     head(){
         // returns the value of the first node in the list. If the list is empty, returns undefined
+        if(!this.headNode) return undefined;
+        return this.headNode.value;
     }
 
     tail(){
         // returns the value of the final node in the list. If the list is empty, returns undefined.
+        if(!this.headNode) return undefined;
+        return this.tailNode.value;
     }
 
     at(index){

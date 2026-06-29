@@ -21,7 +21,7 @@ test('size() test', () => {
     expect(list.size()).toEqual(6);
 })
 
-test('prepend() with existing linked list test', () => {
+test('prepend() with existing list test', () => {
     let list = createAnimalList();
     list.prepend('raven');
     expect(list.toString()).toBe('( raven ) -> ( dog ) -> ( cat ) -> ( parrot ) -> ( hamster ) -> ( snake ) -> ( turtle ) -> null')
@@ -33,3 +33,15 @@ test('prepend() on empty list test', () => {
     list.prepend('lynx')
     expect(list.toString()).toBe('( lynx ) -> ( raven ) -> null');
 });
+
+test('head and tail functions on empty list', () => {
+    let list = new LinkedList();
+    expect(list.head()).toBeUndefined();
+    expect(list.tail()).toBeUndefined();
+})
+
+test('head and tail on existing list', () => {
+    const list = createAnimalList();
+    expect(list.head()).toBe('dog');
+    expect(list.tail()).toBe('turtle');
+})
