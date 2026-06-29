@@ -6,9 +6,25 @@ export default class LinkedList {
         this.tail = null;
         this.size = 0;
     }
+    // Representation Invariant: this.size >= 0
 
     append(value){
         // adds a new node containing value to the end of the list
+        const newNode = new Node(value);
+
+        if (this.size == 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else {
+            // at the tail node, update nextNode pointer
+            (this.tail).nextNode = newNode; 
+
+            // update the tail pointer of LinkedList
+            this.tail = newNode;
+        }
+
+        this.size++;
     }
 
     prepend(value){
@@ -18,6 +34,7 @@ export default class LinkedList {
 
     size(){
         // returns the total number of nodes in the list
+        return this.size;
     }
 
     head(){
@@ -49,7 +66,18 @@ export default class LinkedList {
     }
 
     toString(){
-        // returns a string displaying LinkedList
+        // returns a string displaying LinkedList. If the list is empty, returns an empty string
+        let result = '';
+        if (!this.size) return result;
+        
+        let currentNode = this.head;
+        while(currentNode !== null){
+            result += `( ${currentNode.value} ) -> `
+            currentNode = currentNode.nextNode;
+        }
+        result += 'null';
+
+        return result;
     }
 
     insertAt(index, ...values){
