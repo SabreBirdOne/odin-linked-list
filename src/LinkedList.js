@@ -186,4 +186,50 @@ export default class LinkedList {
             this.tailNode = oldTailNode;
         }
     }
+
+    removeAt(index){
+        /*  removes the node at the given index. If the given index is out of 
+        bounds (below 0 or greater than or equal to the list’s size), 
+        throws a RangeError
+         */
+        if (index < 0 || index >= this.length){
+            throw new RangeError();
+        }
+
+        if (index === 0 && this.length > 0){
+            // Basically pop the first element. Ignore pop()'s return value
+            this.pop();
+
+            // pop() already decreases this.length so no need to do it here.
+        }
+        else {
+            let nodeBeforeTarget = this.headNode;
+            // target node to remove is nodeBeforeTarget.nextNode
+            let currentIndex = 0;
+            while(nodeBeforeTarget !== null){
+                /* this while loop is OK because if blocks above already
+                handles edge cases:
+                    - 0 elements: rangeError always, regardless of index
+                    - 1 element : only the first and only element can be removed with a pop()
+                    - 2 or more : there'll always be indices 0 or 1 to reference.
+                */
+                if (currentIndex + 1 === index) break;
+                nodeBeforeTarget = nodeBeforeTarget.nextNode;
+                currentIndex++;
+            }
+            
+            // if the target node is the tailNode
+            if (nodeBeforeTarget.nextNode === this.tailNode){
+                this.tailNode = nodeBeforeTarget;
+                this.tailNode.nextNode = null;
+            }
+            else { // if the target node is before the tailNode
+                const nodeToConnect = nodeBeforeTarget.nextNode.nextNode;
+                nodeBeforeTarget.nextNode = nodeToConnect;
+            }
+
+            // make sure to update this.length
+            this.length--;
+        }
+    }
 }
