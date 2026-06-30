@@ -1,3 +1,4 @@
+import { node } from "webpack";
 import Node from "./Node";
 
 export default class LinkedList {
@@ -138,5 +139,51 @@ export default class LinkedList {
         If index is out of bounds (below 0 or above the list’s size), 
         throws a RangeError. 
         */
+        if (index < 0 || (index > this.length && this.length > 0)) {
+            throw new RangeError();
+        }
+
+        // if index == 0, insertAt is prepending values to the current linked list
+        if (index === 0){
+            for(let i = values.length - 1; i >= 0; i--){
+                this.prepend(values[i]);
+            }
+        }
+        // if index == this.length, insertAt is appending values to the current linked list
+        else if (index === this.length){
+            values.forEach((value) => this.append(value));
+        }
+        // if index is in range [1, this.length - 1], insertAt is inserting values at the index 
+        // and shift older elements behind it back
+        else {
+            // Keep the old tail node as a record
+            const oldTailNode = this.tailNode;
+
+            // nodeToInsertAt is the node in front of the nodes to be inserted.
+            let nodeToInsertAt = this.headNode;
+            let currentIndex = 0;
+            while(nodeToInsertAt !== null){
+                if (currentIndex + 1 === index) break;
+                nodeToInsertAt = nodeToInsertAt.nextNode;
+                currentIndex++;
+            }
+            
+            // remainingNodes point to the first node behind the nodes to be inserted.
+            const remainingNodes = nodeToInsertAt.nextNode;
+
+            // tailNode is set to nodeToInsertAt, so append can insert nodes behind the index.
+            this.tailNode = nodeToInsertAt;
+            values.forEach((value) => this.append(value));
+
+            /* Append updates this.tailNode for every value inserted, 
+            so this.tailNode points to the last inserted node.
+            
+            Last inserted node is connected to the nodes behind it
+            - link the front nodes and inserted nodes with the rest of the list. */
+            this.tailNode.nextNode = remainingNodes;
+
+            // Set the tailNode to point to the end of the whole linked list
+            this.tailNode = oldTailNode;
+        }
     }
 }

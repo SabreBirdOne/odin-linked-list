@@ -145,7 +145,7 @@ test('findIndex() on existing list (with duplicates)', () => {
 test('insertAt() out of bounds', () => {
     let list = createRavenList();
     expect(() => {list.insertAt(-1, 'raven')}).toThrow(new RangeError());
-    expect(() => {list.insertAt(1, 'raven')}).toThrow(new RangeError());
+    expect(() => {list.insertAt(2, 'raven')}).toThrow(new RangeError());
 })
 
 test('insertAt() to empty list', () => {
@@ -156,7 +156,7 @@ test('insertAt() to empty list', () => {
 
 test('insertAt() to 1-element list', () => {
     let list = createRavenList();
-    list.insertAt(0, 'lynx', 'raven');
+    list.insertAt(0, 'raven', 'lynx');
     expect(list.toString()).toBe('( raven ) -> ( lynx ) -> ( raven ) -> null');
 })
 
