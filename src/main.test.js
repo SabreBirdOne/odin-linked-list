@@ -183,3 +183,28 @@ test('insertAt() to existing list at the headNode', () => {
         '( 10 ) -> ( 11 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> null'
     );
 })
+
+test('removeAt() out of bounds', () => {
+    let list = createRavenList();
+    expect(() => { list.removeAt(-1)}).toThrow(new RangeError());
+    expect(() => { list.removeAt(1)}).toThrow(new RangeError());
+});
+test('removeAt() on empty list', () => {
+    let list = new LinkedList();
+    expect(() => { list.removeAt(0)}).toThrow(new RangeError());
+});
+test('removeAt() to existing list in the headNode', () => {
+    let list = createNumbersList();
+    list.removeAt(0);
+    expect(list.toString()).toBe('( 2 ) -> ( 3 ) -> null');
+});
+test('removeAt() to existing list in the tailNode', () => {
+    let list = createNumbersList();
+    list.removeAt(2);
+    expect(list.toString()).toBe('( 1 ) -> ( 2 ) -> null');
+});
+test('removeAt() to existing list in the middle', () => {
+    let list = createNumbersList();
+    list.removeAt(1);
+    expect(list.toString()).toBe('( 1 ) -> ( 3 ) -> null');
+});
