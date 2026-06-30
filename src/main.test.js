@@ -11,6 +11,14 @@ function createAnimalList() {
     return list;
 }
 
+function createNumbersList() {
+    const list = new LinkedList();
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    return list;
+}
+
 function createRavenList() {
     const list = new LinkedList();
     list.append('raven');
@@ -132,5 +140,46 @@ test('findIndex() on existing list (with duplicates)', () => {
     list.prepend('dog');
     expect(list.findIndex('raven')).toBe(-1);
     expect(list.findIndex('dog')).toBe(0);
+})
 
+test('insertAt() out of bounds', () => {
+    let list = createRavenList();
+    expect(() => {list.insertAt(-1, 'raven')}).toThrow(new RangeError());
+    expect(() => {list.insertAt(1, 'raven')}).toThrow(new RangeError());
+})
+
+test('insertAt() to empty list', () => {
+    let list = new LinkedList();
+    list.insertAt(0, 'lynx', 'raven');
+    expect(list.toString()).toBe('( lynx ) -> ( raven ) -> null');
+})
+
+test('insertAt() to 1-element list', () => {
+    let list = createRavenList();
+    list.insertAt(0, 'lynx', 'raven');
+    expect(list.toString()).toBe('( raven ) -> ( lynx ) -> ( raven ) -> null');
+})
+
+test('insertAt() to existing list in the middle', () => {
+    let list = createNumbersList();
+    list.insertAt(1, 10, 11);
+    expect(list.toString()).toBe(
+        '( 1 ) -> ( 10 ) -> ( 11 ) -> ( 2 ) -> ( 3 ) -> null'
+    );
+})
+
+test('insertAt() to existing list at the tailNode', () => {
+    let list = createNumbersList();
+    list.insertAt(3, 10, 11);
+    expect(list.toString()).toBe(
+        '( 1 ) -> ( 2 ) -> ( 3 ) -> ( 10 ) -> ( 11 ) -> null'
+    );
+})
+
+test('insertAt() to existing list at the headNode', () => {
+    let list = createNumbersList();
+    list.insertAt(0, 10, 11);
+    expect(list.toString()).toBe(
+        '( 10 ) -> ( 11 ) -> ( 1 ) -> ( 2 ) -> ( 3 ) -> null'
+    );
 })
