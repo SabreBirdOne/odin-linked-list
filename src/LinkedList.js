@@ -185,6 +185,9 @@ export default class LinkedList {
             // Set the tailNode to point to the end of the whole linked list
             this.tailNode = oldTailNode;
         }
+        // There is no need to manually handle this.length in insertAt
+        // because insertAt calls append() or prepend() when inserting values, 
+        // which already handles this.length
     }
 
     removeAt(index){
